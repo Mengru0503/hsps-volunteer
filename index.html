@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>胡適國小志工團 | 台北市南港區官方網站</title>
+  <meta name="description" content="陪伴孩子成長，是給孩子最棒的禮物。每週只需 40 分鐘，不需專業經驗。胡適國小志工團 13 個服務組別熱烈招募中。">
+  <meta name="theme-color" content="#2E8B8B">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Noto Sans TC & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#2E8B8B',
+              'teal-dark': '#216666',
+              'teal-light': '#EBF6F6',
+              coral: '#E05A47',
+              'coral-dark': '#C84533',
+              'coral-light': '#FDF2F0',
+              gold: '#E69B24',
+              'gold-light': '#FEF7EB',
+              cream: '#FAF7F2',
+              surface: '#FFFFFF',
+              ink: '#1E2328',
+              muted: '#5A656B',
+              line: '#E6E1D7'
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+          },
+          boxShadow: {
+            'warm-sm': '0 2px 8px rgba(30, 35, 40, 0.04)',
+            'warm-md': '0 6px 20px rgba(30, 35, 40, 0.06)',
+            'warm-lg': '0 12px 32px rgba(30, 35, 40, 0.08)',
+            'warm-xl': '0 20px 48px rgba(30, 35, 40, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #1E2328;
+      font-family: 'Noto Sans TC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Focus Visible Styles (WCAG AA Compliant) */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid #2E8B8B !important;
+      outline-offset: 2px !important;
+      border-radius: 8px;
+    }
+
+    /* Custom Navbar scroll state */
+    #navbar.scrolled {
+      background-color: rgba(250, 247, 242, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #E6E1D7;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    /* Tab Filter transition & tactile feel */
+    .filter-tab {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .filter-tab.active {
+      background-color: #2E8B8B;
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(46, 139, 139, 0.28);
+    }
+
+    /* Group card transition & hover elevation */
+    .group-card {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .group-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(30, 35, 40, 0.10);
+    }
+
+    /* FAQ accordion animation */
+    .faq-answer {
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-item.active .faq-answer {
+      grid-template-rows: 1fr;
+    }
+    .faq-item.active {
+      border-color: #2E8B8B;
+      background-color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(46, 139, 139, 0.08);
+    }
+    .faq-icon {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: #2E8B8B;
+    }
+
+    /* Mobile menu transition */
+    #mobile-menu {
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobile-menu.open {
+      grid-template-rows: 1fr;
+    }
+
+    /* Image illustration background */
+    .card-illustration-bg {
+      background: radial-gradient(circle at 50% 120%, #EBF6F6 0%, #FAF7F2 100%);
+    }
+
+    /* Smooth Pulse indicator */
+    @keyframes soft-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+    .soft-pulse {
+      animation: soft-pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-teal selection:text-white">
+
+  <!-- ==========================================
+       1. STICKY NAVIGATION HEADER
+       ========================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-cream/85 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group focus-visible:outline-none" aria-label="胡適國小志工團首頁">
+        <img 
+          src="assets/hero.png" 
+          alt="胡適國小志工團 Logo" 
+          class="w-11 h-11 rounded-xl object-cover shadow-warm-sm group-hover:scale-105 transition-transform border border-brand-line/60"
+        />
+        <div>
+          <span class="block text-lg font-black text-brand-ink leading-tight tracking-tight">胡適國小志工團</span>
+          <span class="block text-xs text-brand-muted font-medium">台北市南港區</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-1" aria-label="主要導覽選單">
+        <a href="#about" class="px-4 py-2.5 text-sm font-bold text-brand-ink/80 hover:text-brand-teal hover:bg-brand-teal-light/60 rounded-full transition-colors">關於我們</a>
+        <a href="#groups" class="px-4 py-2.5 text-sm font-bold text-brand-ink/80 hover:text-brand-teal hover:bg-brand-teal-light/60 rounded-full transition-colors">13組介紹</a>
+        <a href="#process" class="px-4 py-2.5 text-sm font-bold text-brand-ink/80 hover:text-brand-teal hover:bg-brand-teal-light/60 rounded-full transition-colors">加入流程</a>
+        <a href="#faq" class="px-4 py-2.5 text-sm font-bold text-brand-ink/80 hover:text-brand-teal hover:bg-brand-teal-light/60 rounded-full transition-colors">常見問題</a>
+        <a href="#join" class="ml-3 px-6 py-2.5 bg-brand-coral hover:bg-brand-coral-dark active:scale-[0.98] text-white text-sm font-black rounded-full shadow-warm-md hover:shadow-warm-lg transition-all hover:-translate-y-0.5">
+          立即加入
+        </a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button 
+        id="menu-btn" 
+        class="md:hidden min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-white border border-brand-line text-brand-ink hover:bg-brand-cream active:scale-95 transition-all flex items-center justify-center" 
+        aria-label="開啟選單" 
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="grid md:hidden bg-white border-b border-brand-line shadow-warm-lg overflow-hidden">
+      <div class="min-h-0 px-6 py-4 space-y-2">
+        <a href="#about" class="mobile-link py-3.5 text-base font-bold text-brand-ink border-b border-brand-line/50 flex items-center justify-between active:bg-brand-cream px-2 rounded-xl">
+          <span>關於志工團</span>
+          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#groups" class="mobile-link py-3.5 text-base font-bold text-brand-ink border-b border-brand-line/50 flex items-center justify-between active:bg-brand-cream px-2 rounded-xl">
+          <span>13 個服務組別</span>
+          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#process" class="mobile-link py-3.5 text-base font-bold text-brand-ink border-b border-brand-line/50 flex items-center justify-between active:bg-brand-cream px-2 rounded-xl">
+          <span>四步驟雙軌流程</span>
+          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#faq" class="mobile-link py-3.5 text-base font-bold text-brand-ink border-b border-brand-line/50 flex items-center justify-between active:bg-brand-cream px-2 rounded-xl">
+          <span>家長常見問題</span>
+          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <div class="pt-3">
+          <a href="#join" class="mobile-link block w-full text-center py-4 bg-brand-coral active:scale-[0.98] text-white font-black rounded-2xl shadow-warm-md text-base">
+            1 分鐘快速登記加入
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================
+       2. HERO SECTION
+       ========================================== -->
+  <section id="hero" class="pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Hero Text Column -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          
+          <!-- Announcement Pill -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-teal-light border border-brand-teal/20 text-brand-teal-dark text-xs sm:text-sm font-bold mb-6 shadow-warm-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-coral soft-pulse"></span>
+            113 學年度 · 新進志工熱烈招募中
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-brand-ink tracking-tight leading-[1.25] mb-6">
+            陪伴孩子成長，<br>
+            <span class="text-brand-teal underline decoration-brand-gold/60 decoration-wavy underline-offset-8">是給孩子最棒的禮物！</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-xl text-brand-muted font-normal leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+            每週只需 <strong class="text-brand-coral font-bold underline decoration-brand-coral/30">40 分鐘</strong>，不需任何專業經驗。<br class="hidden sm:block">
+            加入胡適國小志工團，與孩子一同在溫暖的校園裡踏實同行。
+          </p>
+
+          <!-- Feature Badges (Clean Typography & Micro-icons) -->
+          <div class="flex flex-wrap gap-2.5 justify-center lg:justify-start mb-10">
+            <span class="px-3.5 py-1.5 rounded-xl bg-white border border-brand-line text-xs sm:text-sm font-bold text-brand-ink shadow-warm-sm flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              零經驗門檻
+            </span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-white border border-brand-line text-xs sm:text-sm font-bold text-brand-ink shadow-warm-sm flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              每週彈性 40 分鐘
+            </span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-white border border-brand-line text-xs sm:text-sm font-bold text-brand-ink shadow-warm-sm flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              雙軌補發出入證與保險
+            </span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-white border border-brand-line text-xs sm:text-sm font-bold text-brand-ink shadow-warm-sm flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              免填身分證高敏個資
+            </span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="#join" class="px-8 py-4 bg-brand-coral hover:bg-brand-coral-dark active:scale-[0.98] text-white font-black text-base sm:text-lg rounded-2xl shadow-warm-lg hover:shadow-warm-xl transition-all hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 min-h-[48px]">
+              <span>1 分鐘快速登記</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="#groups" class="px-8 py-4 bg-white border-2 border-brand-line hover:border-brand-teal active:scale-[0.98] text-brand-ink hover:text-brand-teal font-bold text-base sm:text-lg rounded-2xl shadow-warm-sm hover:shadow-warm-md transition-all text-center min-h-[48px] flex items-center justify-center">
+              探索 13 個服務組別
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Graphic Illustration Container -->
+        <div class="lg:col-span-5 relative flex justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-brand-gold/20 via-brand-teal/20 to-brand-coral/20 rounded-3xl blur-2xl opacity-70"></div>
+            
+            <div class="relative bg-white p-4 sm:p-6 rounded-3xl border border-brand-line shadow-warm-xl text-center overflow-hidden">
+              <img 
+                src="assets/hero-illustration.png" 
+                alt="胡適國小志工團手繪大合照" 
+                class="w-full h-auto rounded-2xl object-cover"
+                loading="eager"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="hidden flex-col items-center justify-center p-8 bg-brand-teal-light/50 rounded-2xl border border-brand-teal/20">
+                <span class="font-black text-brand-teal text-lg">HSPS Volunteer Group</span>
+                <span class="text-xs text-brand-muted mt-2">請將手繪插圖檔案放置於：<br><code class="bg-white px-2 py-1 rounded text-brand-ink border border-brand-line">assets/hero-illustration.png</code></span>
+              </div>
+              <div class="mt-4 pt-3 border-t border-brand-line/60 flex items-center justify-between text-xs text-brand-muted font-bold">
+                <span>胡適國小志工團大家庭</span>
+                <span class="text-brand-teal">歡迎新成員加入</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       3. ABOUT & ORGANIZATION SECTION
+       ========================================== -->
+  <section id="about" class="py-16 sm:py-24 bg-white border-y border-brand-line">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-black tracking-widest text-brand-teal uppercase bg-brand-teal-light px-3.5 py-1.5 rounded-full inline-block mb-3">
+          ABOUT US · 關於我們
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-ink tracking-tight mb-4">
+          學校最堅強的後盾，家長與學校間的溫暖橋樑
+        </h2>
+        <p class="text-base sm:text-lg text-brand-muted leading-relaxed">
+          胡適國小志工團由熱心的校園家長組成，默默在晨間輔導、校園安全、圖書館管理與各項活動中守護每一個孩子。
+        </p>
+      </div>
+
+      <!-- Key Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+        <div class="p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line text-center shadow-warm-sm transition-transform hover:-translate-y-1">
+          <div class="text-4xl sm:text-5xl font-black text-brand-teal mb-2">13 個</div>
+          <div class="text-base font-bold text-brand-ink">多樣化服務組別</div>
+          <div class="text-xs text-brand-muted mt-1">從晨間進班到幕後美編任選</div>
+        </div>
+        <div class="p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line text-center shadow-warm-sm transition-transform hover:-translate-y-1">
+          <div class="text-4xl sm:text-5xl font-black text-brand-gold mb-2">40 分鐘</div>
+          <div class="text-base font-bold text-brand-ink">每週最低時間需求</div>
+          <div class="text-xs text-brand-muted mt-1">不佔用平日大量工作時間</div>
+        </div>
+        <div class="p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line text-center shadow-warm-sm transition-transform hover:-translate-y-1">
+          <div class="text-4xl sm:text-5xl font-black text-brand-coral mb-2">100%</div>
+          <div class="text-base font-bold text-brand-ink">新手友好陪伴</div>
+          <div class="text-xs text-brand-muted mt-1">資深志工手把手教案支援</div>
+        </div>
+      </div>
+
+      <!-- Leadership Team -->
+      <div class="bg-brand-cream/60 rounded-3xl p-6 sm:p-10 border border-brand-line">
+        <h3 class="text-xl sm:text-2xl font-black text-brand-ink text-center mb-8">
+          志工團幹部團隊
+        </h3>
+        <div class="grid sm:grid-cols-3 gap-6">
+          
+          <!-- 團長 -->
+          <div class="bg-white p-6 rounded-2xl border border-brand-line text-center shadow-warm-sm">
+            <div class="w-16 h-16 rounded-full bg-brand-teal/15 text-brand-teal flex items-center justify-center text-xl mx-auto mb-4 font-black">
+              怡如
+            </div>
+            <div class="inline-block px-3.5 py-1 bg-brand-teal text-white text-xs font-bold rounded-full mb-2">
+              志工團團長
+            </div>
+            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mt-2">
+              統整志工團所有人事調配，擔任志工團與對校窗口聯繫事宜。
+            </p>
+          </div>
+
+          <!-- 副團長 純敏 -->
+          <div class="bg-white p-6 rounded-2xl border border-brand-line text-center shadow-warm-sm">
+            <div class="w-16 h-16 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center text-xl mx-auto mb-4 font-black">
+              純敏
+            </div>
+            <div class="inline-block px-3.5 py-1 bg-brand-gold text-white text-xs font-bold rounded-full mb-2">
+              志工團副團長
+            </div>
+            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mt-2">
+              協助團長工作指示，配合團務執行與各組協調。
+            </p>
+          </div>
+
+          <!-- 副團長 依晴 -->
+          <div class="bg-white p-6 rounded-2xl border border-brand-line text-center shadow-warm-sm">
+            <div class="w-16 h-16 rounded-full bg-brand-coral/15 text-brand-coral flex items-center justify-center text-xl mx-auto mb-4 font-black">
+              依晴
+            </div>
+            <div class="inline-block px-3.5 py-1 bg-brand-coral text-white text-xs font-bold rounded-full mb-2">
+              志工團副團長
+            </div>
+            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mt-2">
+              協助團長工作指示，配合團務執行與資源連結。
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       4. 13 GROUPS DIRECTORY (CLEAN NO EMOJI)
+       ========================================== -->
+  <section id="groups" class="py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-black tracking-widest text-brand-teal uppercase bg-brand-teal-light px-3.5 py-1.5 rounded-full inline-block mb-3">
+          VOLUNTEER GROUPS · 13 個服務組別
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-ink tracking-tight mb-4">
+          找到最符合您生活作息的組別
+        </h2>
+        <p class="text-base text-brand-muted">
+          點選底下標籤快速切換篩選，輕鬆看懂每個組別的工作內容與服務時間！
+        </p>
+      </div>
+
+      <!-- Filter Category Tabs -->
+      <div class="flex flex-wrap gap-2 justify-center mb-12" id="filter-tabs" role="tablist" aria-label="組別分類選單">
+        <button class="filter-tab active min-h-[44px] px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-white text-brand-ink border border-brand-line shadow-warm-sm active:scale-95" role="tab" aria-selected="true" data-filter="all">
+          全部 13 個組別
+        </button>
+        <button class="filter-tab min-h-[44px] px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-white text-brand-ink border border-brand-line shadow-warm-sm active:scale-95" role="tab" aria-selected="false" data-filter="morning">
+          晨間固定型
+        </button>
+        <button class="filter-tab min-h-[44px] px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-white text-brand-ink border border-brand-line shadow-warm-sm active:scale-95" role="tab" aria-selected="false" data-filter="safety">
+          校園守護型
+        </button>
+        <button class="filter-tab min-h-[44px] px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-white text-brand-ink border border-brand-line shadow-warm-sm active:scale-95" role="tab" aria-selected="false" data-filter="flexible">
+          時間彈性型
+        </button>
+        <button class="filter-tab min-h-[44px] px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-white text-brand-ink border border-brand-line shadow-warm-sm active:scale-95" role="tab" aria-selected="false" data-filter="backend">
+          幕後專長型
+        </button>
+      </div>
+
+      <!-- Groups Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="groups-grid">
+
+        <!-- 1. 數學輔導組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="morning">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/數學輔導組.png" alt="數學輔導組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">數學輔導組</h3>
+                <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-2.5 py-1 rounded-lg">晨間固定</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#每週固定1天</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#晨光40分鐘</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                陪伴三至六年級學童進行數學基礎練習與觀念陪伴輔導。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>週一、三 7:50~8:35 任選</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>寧翔 / 昭華</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 國語輔導組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="morning">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/國語輔導組.png" alt="國語輔導組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">國語輔導組</h3>
+                <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-2.5 py-1 rounded-lg">晨間固定</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#每週固定1天</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#晨光40分鐘</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                協助小一新生注音符號認讀、國字筆順啟蒙與晨間閱讀陪伴。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>週一、四 7:50~8:35 任選</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>怡如 / 碧媚、詩嫻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 英語輔導組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="morning">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/英語輔導組.png" alt="英語輔導組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">英語輔導組</h3>
+                <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-2.5 py-1 rounded-lg">晨間固定</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#每週固定1天</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#晨光40分鐘</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                字母發音帶領與課堂秩序維護（有現成教案與正式教師現場帶領）。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>週一、三 7:50~8:35 任選</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>依倫 / 奎里</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 生活媽媽組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="morning">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/生活媽媽組.png" alt="生活媽媽組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">生活媽媽組</h3>
+                <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-2.5 py-1 rounded-lg">晨間固定</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#每週固定1天</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#五段品格教學</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                進班進行五段式品格教育繪本互動教學，引導孩子建立溫暖正向生活態度。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>週二、三、四 7:50~8:35 任選</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>美紅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 茶藝組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="morning">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/茶藝組.png" alt="茶藝組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">茶藝組</h3>
+                <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-2.5 py-1 rounded-lg">晨間固定</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#茶藝靜心</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#陪伴高年級</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                每週三陪伴四至六年級學童進行泡茶體驗與專注靜心沉澱。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>每週三 7:30~8:30</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>信忠 / 于婷、瑩臻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. 交通導護組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="safety">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/交通導護組.png" alt="交通導護組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">交通導護組</h3>
+                <span class="text-xs font-bold text-brand-gold bg-brand-gold-light px-2.5 py-1 rounded-lg">校園守護</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#安全守門員</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#多時段自選</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                校園周邊重要路口上下學交通安全守護與學童過馬路引導。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>自選時段：</strong>上學7:20-7:50 / 中午12:35-12:55 / 放學15:45-16:10</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>瑞芳 / 克亮</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. 安全照護組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="safety">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/安全照護組.png" alt="安全照護組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">安全照護組</h3>
+                <span class="text-xs font-bold text-brand-gold bg-brand-gold-light px-2.5 py-1 rounded-lg">校園守護</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#每月2次</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#低年級陪伴</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                每月第一與第二個週二晨間陪伴一、二年級學童及「每月一繪」活動安全照護。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>每月一、二個週二 7:50~8:35</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>瑩臻 / 佳伶</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. 圖書組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="flexible">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/圖書組.png" alt="圖書組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">圖書組</h3>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">時間彈性</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#自由排班</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#圖書整理</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                自由選擇排班時段，協助學童借還書、圖書歸位消毒、新書編排與館藏維護。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>自由選擇時段排班</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>依晴 / 維云</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. 園藝組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="flexible">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/園藝組.png" alt="園藝組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">園藝組</h3>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">時間彈性</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#非每週固定</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#美化校園</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                修剪綠植、植栽養護與校園花園綠化美化，給孩子更美好的自然學習環境。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>每週四 7:50~9:00（彈性調整）</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>美紅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. 熊熊輔導組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="flexible">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/熊熊輔導組.png" alt="熊熊輔導組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">熊熊輔導組</h3>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">時間彈性</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#1對1陪伴</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#桌遊畫畫</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                配合學校輔導室排程，進行一對一關懷陪伴、桌遊、聊天繪畫與功課輔導。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>配合學校排程彈性協調</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>佳恩 / 柏芬</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. 健康服務組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="flexible">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/健康服務組.png" alt="健康服務組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">健康服務組</h3>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">時間彈性</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#健檢支援</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#配合健服</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                配合健康服務中心，支援全校學童視力、齒科及各項定期健康檢查。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>配合健服中心檢查時程</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>仟翊</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. 資訊美編組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="backend">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/資訊美編組.png" alt="資訊美編組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">資訊美編組</h3>
+                <span class="text-xs font-bold text-brand-coral bg-brand-coral-light px-2.5 py-1 rounded-lg">幕後專長</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#在家可做</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#免進校園</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                志工團文宣海報設計、活動傳單視覺美化與數位資訊管理（遠端即可參與）。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-coral shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>機動觸發 / 在家彈性製作</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-coral shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>孟孺 / 鈺婷、麗宸</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. 人資組 -->
+        <div class="group-card bg-white rounded-3xl border border-brand-line overflow-hidden shadow-warm-md flex flex-col" data-category="backend">
+          <div class="h-44 sm:h-48 w-full card-illustration-bg relative border-b border-brand-line/60 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            <img src="assets/group-icons/人資組.png" alt="人資組插圖" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" loading="lazy" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black text-brand-ink">人資組</h3>
+                <span class="text-xs font-bold text-brand-coral bg-brand-coral-light px-2.5 py-1 rounded-lg">幕後專長</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#行政專長</span>
+                <span class="text-[11px] font-bold text-brand-muted bg-brand-cream px-2 py-0.5 rounded-md border border-brand-line">#免進校園</span>
+              </div>
+              <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
+                志工資料登記管理、年度團體保險投保作業、時數登錄、校園出入證與獎項申請。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-line/60 text-xs space-y-2 text-brand-ink/90 font-medium">
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-coral shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span><strong>服務時間：</strong>隨時 / 平日行政作業</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <svg class="w-4 h-4 text-brand-coral shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span><strong>組長 / 副組長：</strong>杏如 / 孟孺</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       5. 4-STEP JOINING PROCESS (DUAL-TRACK)
+       ========================================== -->
+  <section id="process" class="py-16 sm:py-24 bg-white border-y border-brand-line">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-black tracking-widest text-brand-teal uppercase bg-brand-teal-light px-3.5 py-1.5 rounded-full inline-block mb-3">
+          HOW TO JOIN · 加入流程 4 步驟
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-ink tracking-tight mb-4">
+          簡單四步驟，輕鬆成為志工夥伴
+        </h2>
+        <p class="text-base text-brand-muted">
+          不論您的平日時間如何安排，我們都提供極高彈性的發證與保險機制！
+        </p>
+      </div>
+
+      <!-- Process Steps Container -->
+      <div class="space-y-8 relative">
+
+        <!-- Step 1 -->
+        <div class="flex flex-col sm:flex-row gap-6 p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line shadow-warm-sm hover:shadow-warm-md transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-teal text-white font-black text-2xl flex items-center justify-center shrink-0 shadow-warm-sm">
+            1
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="text-xl font-black text-brand-ink">線上極速登記</h3>
+              <span class="text-xs font-bold text-brand-coral bg-brand-coral-light px-2.5 py-0.5 rounded-full">只需要 30 秒</span>
+            </div>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              點擊網站報名按鈕，填寫稱呼、手機號碼與感興趣的志願組別。第一階段<strong class="text-brand-ink underline decoration-brand-coral/30">完全免填身分證字號與詳細個資</strong>，零負擔登記。
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex flex-col sm:flex-row gap-6 p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line shadow-warm-sm hover:shadow-warm-md transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-teal text-white font-black text-2xl flex items-center justify-center shrink-0 shadow-warm-sm">
+            2
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="text-xl font-black text-brand-ink">加入「新進志工 LINE 群」</h3>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">獲取第一手資訊</span>
+            </div>
+            <p class="text-sm text-brand-muted leading-relaxed mb-3">
+              完成登記或從網站入口直接加入 LINE 討論群。群內提供置頂迎新通知與組長問答，讓您在進班前有滿滿安全感。
+            </p>
+            <a href="https://line.me/ti/g/Wmk87MnSVQ" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800">
+              <span>點此直接進入 LINE 新進志工群組</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Step 3: Dual-Track Training & Internship (IMPORTANT) -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-brand-gold-light/40 border-2 border-brand-gold/30 shadow-warm-md">
+          <div class="flex flex-col sm:flex-row gap-6 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-brand-gold text-white font-black text-2xl flex items-center justify-center shrink-0 shadow-warm-sm">
+              3
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-brand-ink mb-1">迎新與訓練 (友善雙軌分流)</h3>
+              <p class="text-sm text-brand-muted">依據主管機關規範，出入證與年度保險採「雙軌發放原則」，時間安排超貼心：</p>
+            </div>
+          </div>
+
+          <!-- Dual Track Boxes Grid -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <!-- Track A: Fast Track -->
+            <div class="bg-white p-5 rounded-2xl border border-brand-gold/40 shadow-warm-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="font-black text-brand-ink text-base">路線 A：首批發證（10月底）</span>
+                  <span class="text-[11px] font-bold text-brand-teal bg-brand-teal-light px-2 py-0.5 rounded-md">優先領證</span>
+                </div>
+                <ul class="text-xs text-brand-muted space-y-2 mb-4">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>全程參與 <strong>10/20（二）</strong> 實體迎新特殊訓練研習課程。</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>完成線上 6 小時基礎訓手冊登錄。</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-[11px] font-bold text-brand-teal bg-brand-teal-light/60 p-2.5 rounded-xl">
+                適用對象：時間可配合 10/20 實體研習者。
+              </div>
+            </div>
+
+            <!-- Track B: Flexible Internship Track -->
+            <div class="bg-white p-5 rounded-2xl border border-brand-line shadow-warm-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="font-black text-brand-ink text-base">路線 B：第二批補發（12月底）</span>
+                  <span class="text-[11px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">平日上班族首選</span>
+                </div>
+                <ul class="text-xs text-brand-muted space-y-2 mb-4">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>平日上班不克出席 10/20 者，採<strong>組內彈性實習服務滿 4 小時且滿 2 個月</strong>。</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-purple-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>經組長評估通過後，12 月底統一補發證件並納入保險。</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-[11px] font-bold text-purple-700 bg-purple-50 p-2.5 rounded-xl">
+                適用對象：平日工作繁忙、無固定全天假期的家長。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex flex-col sm:flex-row gap-6 p-6 sm:p-8 rounded-3xl bg-brand-cream border border-brand-line shadow-warm-sm hover:shadow-warm-md transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-coral text-white font-black text-2xl flex items-center justify-center shrink-0 shadow-warm-sm">
+            4
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-brand-ink mb-2">正式排班與領證</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              領取的專屬校園志工出入證與志工團服，正式排班愉快上工，成為孩子在學校最堅強溫暖的靠山！
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       6. REGISTRATION & LINE JOIN ZONE
+       ========================================== -->
+  <section id="join" class="py-16 sm:py-24 bg-brand-cream">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-black tracking-widest text-brand-coral uppercase bg-brand-coral-light px-3.5 py-1.5 rounded-full inline-block mb-3">
+          REGISTER NOW · 立即登記
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-ink tracking-tight mb-4">
+          選擇最適合您的報名／觀望動線
+        </h2>
+        <p class="text-base text-brand-muted">
+          您可以選擇直接內嵌登記表單，或先加入 LINE 群向組長諮詢！
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Track A: Embedded Google Form Container (7 cols) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl border border-brand-line p-4 sm:p-8 shadow-warm-xl">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-brand-line">
+            <div>
+              <h3 class="text-xl font-black text-brand-ink">動線 A：線上快速登記</h3>
+              <p class="text-xs text-brand-muted">免填身分證高敏個資 · 免處罰疑慮</p>
+            </div>
+            <span class="text-xs font-bold text-brand-teal bg-brand-teal-light px-3 py-1 rounded-full shrink-0 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              預估時間 30 秒
+            </span>
+          </div>
+
+          <!-- Embedded Form Iframe Container -->
+          <div class="w-full rounded-2xl overflow-hidden bg-brand-cream/40 border border-brand-line/50">
+            <iframe 
+              src="https://docs.google.com/forms/d/e/1FAIpQLSfbxQ0dBWrOFe71i0CKvSbpkQ3AXMlHB1oflHgWl0_ZlUaOOQ/viewform?embedded=true" 
+              width="100%" 
+              height="960" 
+              frameborder="0" 
+              marginheight="0" 
+              marginwidth="0"
+              title="胡適志工團登記表單"
+              loading="lazy"
+              class="w-full border-0"
+            >
+              載入報名表單中...
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Track B: LINE Group Joining Box (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- LINE Group Box -->
+          <div class="bg-white rounded-3xl border border-brand-line p-6 sm:p-8 shadow-warm-xl text-center">
+            <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-warm-md">
+              LINE
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-brand-ink mb-2">
+              動線 B：觀望與諮詢專區
+            </h3>
+            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-6">
+              怕被綁死或對時間有疑慮？先加入「新進志工 LINE 群」，隨時發問、隨時了解，無壓力隨時可退出！
+            </p>
+
+            <!-- QR Code Card -->
+            <div class="bg-brand-cream p-4 rounded-2xl border border-brand-line inline-block mb-6 shadow-warm-sm">
+              <img 
+                src="assets/line-qrcode.png" 
+                alt="新進志工 LINE 群組 QR Code" 
+                class="w-48 h-48 rounded-xl object-contain mx-auto"
+                loading="lazy"
+                onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fline.me%2Fti%2Fg%2FWmk87MnSVQ&format=png'; this.onerror=null;"
+              />
+              <span class="block text-[11px] font-bold text-brand-muted mt-2">手機掃描 QR Code 進入群組</span>
+            </div>
+
+            <!-- Join Button -->
+            <a 
+              href="https://line.me/ti/g/Wmk87MnSVQ" 
+              target="_blank" 
+              rel="noopener"
+              class="flex items-center justify-center gap-2 w-full min-h-[48px] py-4 px-6 bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-white font-black text-base rounded-2xl shadow-warm-md transition-all text-center"
+            >
+              <span>一鍵加入 LINE 群組</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Quick Privacy Reassurance Card -->
+          <div class="bg-brand-teal-light/80 rounded-3xl border border-brand-teal/20 p-6 flex items-start gap-4 shadow-warm-sm">
+            <svg class="w-6 h-6 text-brand-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <div>
+              <h4 class="font-black text-brand-ink text-sm mb-1">個資安全與隱私承諾</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">
+                報名資料僅用於志工團聯絡及任務通知。身分證字號、詳細生日等投保高敏資料，將於進群確認後再獨立辦理。
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       7. FAQ ACCORDION SECTION
+       ========================================== -->
+  <section id="faq" class="py-16 sm:py-24 bg-white border-t border-brand-line">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-black tracking-widest text-brand-teal uppercase bg-brand-teal-light px-3.5 py-1.5 rounded-full inline-block mb-3">
+          FAQ · 常見問題
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-ink tracking-tight mb-4">
+          新生家長最關心的實用解答
+        </h2>
+        <p class="text-base text-brand-muted">
+          了解您對於時間、教學能力與請假的疑慮，我們都有完善配套！
+        </p>
+      </div>
+
+      <!-- FAQ Accordion List -->
+      <div class="space-y-4" id="faq-accordion" role="tablist">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-brand-cream rounded-2xl border border-brand-line overflow-hidden transition-all shadow-warm-sm">
+          <button class="faq-trigger min-h-[56px] w-full px-6 py-5 text-left font-black text-brand-ink text-base sm:text-lg flex items-center justify-between gap-4 active:bg-brand-teal-light/20" aria-expanded="false">
+            <span class="flex items-center gap-3">
+              <span class="text-brand-teal font-black text-lg">Q1</span>
+              <span>上班族平日無法參加 10/20（二）迎新特殊訓，還能加入嗎？</span>
+            </span>
+            <svg class="faq-icon w-5 h-5 text-brand-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer grid">
+            <div class="overflow-hidden px-6 pb-6 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 pt-4">
+              <strong>當然可以！</strong> 我們提供「雙軌發放原則」：平日上班無法出席 10/20 研習者，採「組內彈性實習服務滿 4 小時且滿 2 個月」，經組長評估通過後，將於 12 月底第二批補發出入證並統一納入年度保險。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-brand-cream rounded-2xl border border-brand-line overflow-hidden transition-all shadow-warm-sm">
+          <button class="faq-trigger min-h-[56px] w-full px-6 py-5 text-left font-black text-brand-ink text-base sm:text-lg flex items-center justify-between gap-4 active:bg-brand-teal-light/20" aria-expanded="false">
+            <span class="flex items-center gap-3">
+              <span class="text-brand-teal font-black text-lg">Q2</span>
+              <span>校園出入證與志工團保險發放原則是什麼？</span>
+            </span>
+            <svg class="faq-icon w-5 h-5 text-brand-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer grid">
+            <div class="overflow-hidden px-6 pb-6 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 pt-4">
+              依據主管機關規範，完成 10/20 實體迎新＋線上基礎訓者，於 10 月底優先發放第一批證件與投保；無法參與者經組內實習 4 小時且滿 2 個月後於 12 月底補發。年度累計服務滿 9 小時即可符合完整團體保險保障資格。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-brand-cream rounded-2xl border border-brand-line overflow-hidden transition-all shadow-warm-sm">
+          <button class="faq-trigger min-h-[56px] w-full px-6 py-5 text-left font-black text-brand-ink text-base sm:text-lg flex items-center justify-between gap-4 active:bg-brand-teal-light/20" aria-expanded="false">
+            <span class="flex items-center gap-3">
+              <span class="text-brand-teal font-black text-lg">Q3</span>
+              <span>輔導組需要教學專業或標準英語發音嗎？</span>
+            </span>
+            <svg class="faq-icon w-5 h-5 text-brand-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer grid">
+            <div class="overflow-hidden px-6 pb-6 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 pt-4">
+              <strong>完全不需要！</strong> 志工的核心角色是「耐心陪伴與鼓勵」。各組均備有現成教學教案與講義，現場亦有資深志工夥伴或正式教師帶領，只要抱持著陪伴孩子的心情即可輕鬆上手。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-brand-cream rounded-2xl border border-brand-line overflow-hidden transition-all shadow-warm-sm">
+          <button class="faq-trigger min-h-[56px] w-full px-6 py-5 text-left font-black text-brand-ink text-base sm:text-lg flex items-center justify-between gap-4 active:bg-brand-teal-light/20" aria-expanded="false">
+            <span class="flex items-center gap-3">
+              <span class="text-brand-teal font-black text-lg">Q4</span>
+              <span>如果臨時家中有事或孩子生病需要請假怎麼辦？</span>
+            </span>
+            <svg class="faq-icon w-5 h-5 text-brand-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer grid">
+            <div class="overflow-hidden px-6 pb-6 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 pt-4">
+              志工團具備完善的「組內互助補位機制」。只要提前在組別 LINE 群組發聲告知，同組夥伴都會互相協調代班支援，家長完全不必擔心請假造成的壓力。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       8. FOOTER
+       ========================================== -->
+  <footer class="bg-brand-ink text-white py-12 border-t border-brand-line/20 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
+        
+        <!-- Col 1: Brand Info (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <img 
+              src="assets/hero.png" 
+              alt="胡適國小志工團 Logo" 
+              class="w-10 h-10 rounded-xl object-cover"
+            />
+            <span class="text-lg font-black tracking-tight">台北市南港區胡適國小志工團</span>
+          </div>
+          <p class="text-xs sm:text-sm text-brand-muted leading-relaxed max-w-sm">
+            陪伴孩子成長，是給孩子最棒的禮物。學校最堅強的後盾，家長與學校間的溫暖橋樑。
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation Links (3 cols) -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="text-xs font-black tracking-wider text-brand-gold uppercase">網站選單</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-brand-muted">
+            <li><a href="#about" class="hover:text-white transition-colors">關於志工團</a></li>
+            <li><a href="#groups" class="hover:text-white transition-colors">13 個服務組別</a></li>
+            <li><a href="#process" class="hover:text-white transition-colors">加入流程雙軌制</a></li>
+            <li><a href="#join" class="hover:text-white transition-colors">線上報名／LINE群</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors">家長常見問題</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: School Info (4 cols) -->
+        <div class="lg:col-span-4 space-y-3">
+          <h4 class="text-xs font-black tracking-wider text-brand-gold uppercase">學校與聯絡資訊</h4>
+          <div class="text-xs sm:text-sm text-brand-muted space-y-1.5 leading-relaxed">
+            <div><strong>學校地址：</strong>115 台北市南港區胡適路 2 之 1 號</div>
+            <div><strong>新進志工 LINE：</strong><a href="https://line.me/ti/g/Wmk87MnSVQ" target="_blank" rel="noopener" class="text-emerald-400 underline hover:text-emerald-300">點此加入 LINE 討論群</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Disclaimer & Copyright -->
+      <div class="pt-8 border-t border-white/10 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-muted">
+        <p><strong>個資保護聲明：</strong>本網站僅初階段收取志工聯絡與組別志願，身分證字號等保險高敏個資不在前台收集。</p>
+        <p>© 2025–2026 胡適國小志工團 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+       JAVASCRIPT INTERACTIVITY
+       ========================================== -->
+  <script>
+    // 1. Mobile Menu Toggle with Accessibility
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // 2. Navbar Scroll Shadow Effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // 3. Filterable Group Cards with Smooth Animation & Accessibility
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const groupCards = document.querySelectorAll('.group-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const filter = tab.getAttribute('data-filter');
+
+        groupCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 200);
+          }
+        });
+      });
+    });
+
+    // 4. FAQ Accordion Interaction with Accessibility
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      trigger.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isActive) {
+          item.classList.add('active');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
